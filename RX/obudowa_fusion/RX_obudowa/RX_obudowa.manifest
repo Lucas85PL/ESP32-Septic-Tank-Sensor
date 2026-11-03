@@ -1,0 +1,11 @@
+{
+  "autodeskProduct": "Fusion",
+  "type": "script",
+  "author": "",
+  "description": {
+    "": "Obudowa odbiornika RX (plytka E32R28T 2.8 cala): okno na ekran, otwor USB, otwarty tyl, stopka"
+  },
+  "supportedOS": "windows|mac",
+  "editEnabled": true,
+  "version": "1.0"
+}

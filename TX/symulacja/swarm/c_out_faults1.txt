@@ -1,0 +1,18 @@
+STRESS=0 FAULTS=1, przebiegow: 120
+
+| Metryka | SUFIT (idealny czujnik) | 1.4.5 (v1.5.0) | V3 (rekomendowana) | V4 (v1.7.1 poprawki) | C-A (R1-R4) | C-B (R1-R4 + >=140 od razu) |
+|---|---|---|---|---|---|---|
+| Widok odbiornika DOBRY (blad <= 10 cm) [% czasu] | 98.8 | 74.5 | 86.8 | 90.1 | 88.0 | 89.9 |
+| Widok NIEAKTUALNY (brak swiezych danych > 26 h) [%] | 0.1 | 11.6 | 4.9 | 7.3 | 8.6 | 7.1 |
+| Widok BLEDNY (swieze, ale zle dane) [%] | 1.1 | 13.9 | 8.3 | 2.6 | 3.1 | 2.7 |
+| Sredni blad widoku [cm] | 3.0 | 15.0 | 10.6 | 6.5 | 8.3 | 6.5 |
+| Dostarczone bledne wartosci (> 8 cm) [szt./50 dni] | 0.00 | 9.27 | 4.63 | 0.48 | 0.66 | 0.69 |
+| w tym grube bledy (> 20 cm) [szt./50 dni] | 0.00 | 7.65 | 4.37 | 0.28 | 0.44 | 0.47 |
+| Dostarczone wartosci ogolem [szt./50 dni] | 97.0 | 72.8 | 80.3 | 78.9 | 77.0 | 79.0 |
+| Wykrycie wywozu: mediana / p95 [h] (nie wykryto %) | 5.8 / 11.7 (0%) | 21.1 / 31.1 (0%) | 21.0 / 31.5 (0%) | 21.1 / 31.5 (0%) | 32.7 / 44.6 (0%) | 21.1 / 32.0 (0%) |
+| Powrot po resecie TX: mediana / p95 [h] (nie wrocil %) | 6.0 / 11.6 (0%) | 0.2 / 270.6 (1%) | 0.1 / 48.2 (0%) | 0.1 / 36.2 (0%) | 0.1 / 36.2 (0%) | 0.1 / 31.8 (0%) |
+| Powrot po awarii odbiornika: mediana / p95 [h] (nie wrocil %) | 5.7 / 11.2 (0%) | 10.1 / 222.2 (1%) | 1.6 / 59.0 (0%) | 1.5 / 40.2 (0%) | 1.7 / 46.9 (0%) | 1.6 / 42.7 (0%) |
+| Cykle: OK / NO_VALID / JUMP_REJ / DEADZONE | 100 / 0 / 0 / 0 | 75 / 26 / 0 / 0 | 81 / 9 / 10 / 0 | 80 / 20 / 1 / 0 | 78 / 20 / 3 / 0 | 80 / 20 / 1 / 0 |
+| Czas aktywnosci [min/dobe] | 5.3 | 14.4 | 5.6 | 5.5 | 5.5 | 5.5 |
+| Falszywe "pelny" (<= 30 cm przy poziomie >= 40) [szt./50 dni] | 0.00 | 1.26 | 4.38 | 0.26 | 0.27 | 0.26 |
+| Przebiegi z >= 1 falszywym "pelny" [%] | 0 | 31 | 98 | 17 | 17 | 17 |

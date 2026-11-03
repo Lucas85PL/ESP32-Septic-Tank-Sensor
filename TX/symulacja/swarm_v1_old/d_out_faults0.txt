@@ -1,0 +1,15 @@
+FAULTS=0 ECHO_P=0.2 runs=150
+| Metryka | SUFIT (idealny czujnik) | V4 firmware (+-1.5, min12) | D1 prior min6 | D2 prior min5 | D3 prior min6 + sup3 | D4 prior min5, sup3 prior | D5 prior min6 + reject tight sd<0.2 | D6 prior min6, waga n*serie | D7 okno +-1.0, prior min6 | D8 okno +-2.5, prior min6 | D9 min6 + sup3 + sd>=0.2 |
+|---|---|---|---|---|---|---|---|---|---|---|---|
+| Widok odbiornika DOBRY (blad <= 10 cm) [% czasu] | 98.8 | 96.3 | 96.2 | 96.3 | 96.3 | 96.4 | 96.2 | 96.2 | 96.2 | 96.3 | 96.3 |
+| Widok NIEAKTUALNY (brak swiezych danych > 26 h) [%] | 0.1 | 1.4 | 1.4 | 1.3 | 1.4 | 1.3 | 1.4 | 1.4 | 1.4 | 1.3 | 1.4 |
+| Widok BLEDNY (swieze, ale zle dane) [%] | 1.1 | 2.2 | 2.4 | 2.4 | 2.2 | 2.3 | 2.4 | 2.4 | 2.4 | 2.4 | 2.2 |
+| Sredni blad widoku [cm] | 3.0 | 5.2 | 5.2 | 5.2 | 5.2 | 5.1 | 5.2 | 5.2 | 5.2 | 5.1 | 5.2 |
+| Dostarczone bledne wartosci (> 8 cm) [szt./50 dni] | 0.00 | 0.19 | 0.26 | 0.35 | 0.19 | 0.27 | 0.27 | 0.25 | 0.27 | 0.33 | 0.19 |
+| w tym grube bledy (> 20 cm) [szt./50 dni] | 0.00 | 0.13 | 0.21 | 0.28 | 0.13 | 0.21 | 0.21 | 0.21 | 0.21 | 0.27 | 0.14 |
+| Dostarczone wartosci ogolem [szt./50 dni] | 97.0 | 94.5 | 94.7 | 94.8 | 94.6 | 94.7 | 94.6 | 94.7 | 94.6 | 94.8 | 94.6 |
+| Wykrycie wywozu: mediana / p95 [h] (nie wykryto %) | 5.5 / 11.8 (0%) | 21.0 / 31.5 (0%) | 21.0 / 31.5 (0%) | 20.9 / 31.5 (0%) | 21.0 / 31.5 (0%) | 20.9 / 31.5 (0%) | 21.0 / 31.5 (0%) | 21.0 / 31.5 (0%) | 21.0 / 31.5 (0%) | 20.7 / 31.5 (0%) | 21.0 / 31.5 (0%) |
+| Powrot po resecie TX: mediana / p95 [h] (nie wrocil %) | 5.9 / 11.6 (0%) | 0.1 / 12.1 (0%) | 0.1 / 12.1 (0%) | 0.1 / 12.1 (0%) | 0.1 / 12.1 (0%) | 0.1 / 12.1 (0%) | 0.1 / 12.1 (0%) | 0.1 / 12.1 (0%) | 0.1 / 12.1 (0%) | 0.1 / 12.1 (0%) | 0.1 / 12.1 (0%) |
+| Powrot po awarii odbiornika: mediana / p95 [h] (nie wrocil %) | 5.7 / 11.3 (0%) | 6.4 / 11.8 (0%) | 6.4 / 11.8 (0%) | 6.3 / 11.8 (0%) | 6.4 / 11.8 (0%) | 6.3 / 11.8 (0%) | 6.4 / 11.8 (0%) | 6.4 / 11.8 (0%) | 6.4 / 11.8 (0%) | 6.4 / 11.8 (0%) | 6.4 / 11.8 (0%) |
+| Cykle: OK / NO_VALID / JUMP_REJ / DEADZONE | 100 / 0 / 0 / 0 | 97 / 3 / 1 / 0 | 97 / 3 / 1 / 0 | 97 / 3 / 1 / 0 | 97 / 3 / 1 / 0 | 97 / 3 / 1 / 0 | 97 / 3 / 1 / 0 | 97 / 3 / 1 / 0 | 97 / 3 / 1 / 0 | 97 / 3 / 1 / 0 | 97 / 3 / 1 / 0 |
+| Czas aktywnosci [min/dobe] | 5.3 | 5.5 | 5.5 | 5.5 | 5.5 | 5.5 | 5.5 | 5.5 | 5.5 | 5.5 | 5.5 |

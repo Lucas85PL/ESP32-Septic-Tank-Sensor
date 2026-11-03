@@ -1,0 +1,16 @@
+ABLACJA STRESS=0 FAULTS=1 runs=120
+
+| Metryka | V4 (v1.7.1 poprawki) | C-B bez R4 (K=999) | C-B R4 bez 'bad' (bad_expire=0) | C-B cand_tol=3 | C-B (R1-R4 + >=140 od razu) |
+|---|---|---|---|---|---|
+| Widok odbiornika DOBRY (blad <= 10 cm) [% czasu] | 90.1 | 89.9 | 89.9 | 89.7 | 89.9 |
+| Widok NIEAKTUALNY (brak swiezych danych > 26 h) [%] | 7.3 | 7.1 | 7.1 | 7.2 | 7.1 |
+| Widok BLEDNY (swieze, ale zle dane) [%] | 2.6 | 2.7 | 2.7 | 2.8 | 2.7 |
+| Sredni blad widoku [cm] | 6.5 | 6.5 | 6.5 | 6.5 | 6.5 |
+| Dostarczone bledne wartosci (> 8 cm) [szt./50 dni] | 0.48 | 0.69 | 0.69 | 0.69 | 0.69 |
+| w tym grube bledy (> 20 cm) [szt./50 dni] | 0.28 | 0.47 | 0.47 | 0.47 | 0.47 |
+| Dostarczone wartosci ogolem [szt./50 dni] | 78.9 | 79.0 | 79.0 | 78.8 | 79.0 |
+| Wykrycie wywozu: mediana / p95 [h] (nie wykryto %) | 21.1 / 31.5 (0%) | 21.1 / 32.0 (0%) | 21.1 / 32.0 (0%) | 21.1 / 32.0 (0%) | 21.1 / 32.0 (0%) |
+| Powrot po resecie TX: mediana / p95 [h] (nie wrocil %) | 0.1 / 36.2 (0%) | 0.1 / 31.8 (0%) | 0.1 / 31.8 (0%) | 0.1 / 36.2 (0%) | 0.1 / 31.8 (0%) |
+| Powrot po awarii odbiornika: mediana / p95 [h] (nie wrocil %) | 1.5 / 40.2 (0%) | 1.6 / 42.7 (0%) | 1.6 / 42.7 (0%) | 1.6 / 42.7 (0%) | 1.6 / 42.7 (0%) |
+| Cykle: OK / NO_VALID / JUMP_REJ / DEADZONE | 80 / 20 / 1 / 0 | 80 / 20 / 1 / 0 | 80 / 20 / 1 / 0 | 80 / 20 / 1 / 0 | 80 / 20 / 1 / 0 |
+| Czas aktywnosci [min/dobe] | 5.5 | 5.5 | 5.5 | 5.5 | 5.5 |

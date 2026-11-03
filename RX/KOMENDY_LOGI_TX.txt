@@ -1,0 +1,131 @@
+================================================================================
+ RX 2.0.0 - ZGRYWANIE LOGOW NADAJNIKA (TX) Z ODBIORNIKA DO LAPTOPA
+================================================================================
+
+JAK TO DZIALA
+-------------
+Nadajnik (TX) po kazdym cyklu pomiarowym wysyla zapisane cykle (logi) przez ESP-NOW
+do odbiornika (RX). Odbiornik zapisuje je w swojej pamieci flash (/txlog.txt).
+Z odbiornika (latwo dostepnego, USB) zgrywasz je na laptop.
+
+ - TX trzyma w sobie ostatnie 28 cykli, RX trzyma wszystko, co dostal (ok. 800 KB,
+   potem kasuje najstarsze).
+ - Kazdy cykl ma unikalny identyfikator: epoch (hex) + id (numer cyklu).
+   RX dopisuje przed kazdym cyklem naglowek:
+       ##### RX epoch=XXXXXXXX id=57 bytes=2310
+ - Log dociera do RX dopiero w nastepnym kontakcie TX z RX (po cyklu TX - co kilka/
+   kilkanascie godzin). Pierwszy cykl po wgraniu nowej wersji TX pojawi sie na RX
+   po pierwszym cyklu pomiarowym TX.
+
+WAZNE ZASADY
+------------
+ 1. Port COM moze miec jednego uzytkownika. PRZED skryptem ZAMKNIJ PlatformIO Monitor
+    (i kazdy inny program z otwartym portem).
+ 2. Log NIE jest wypisywany w terminalu przy zwyklym monitorowaniu - pojawia sie tylko
+    na polecenie (komenda TXLOG DUMP) albo trafia prosto do pliku (skrypt).
+ 3. Skrypt otwiera port bez resetowania plyty (DTR/RTS wylaczone).
+
+
+--------------------------------------------------------------------------------
+ SPOSOB 1 (ZALECANY): SKRYPT -> PLIK .TXT
+--------------------------------------------------------------------------------
+Uruchamiaj z folderu "RX 2.0.0" (w terminalu VS Code / PowerShell):
+
+   Zapis calego logu (port wykrywany automatycznie):
+       python tools/txlog_pobierz.py
+
+   Gdy "python" nie ma biblioteki pyserial, uzyj pythona z PlatformIO:
+       & "$env:USERPROFILE\.platformio\penv\Scripts\python.exe" tools\txlog_pobierz.py
+   (albo jednorazowo:  pip install pyserial)
+
+   Wynik: plik  logi_tx\txlog_RRRRMMDD_GGMMSS.txt   (w folderze RX 2.0.0)
+   Na ekranie tylko podsumowanie, np.:
+       Zapisano 28 rekordow (63120 znakow, cykle 30-57) -> ...\logi_tx\txlog_20261012_093015.txt
+
+   Opcje:
+       --port COM5          wskaz port recznie (gdy jest kilka portow)
+       --out moj_log.txt    wlasna nazwa/sciezka pliku
+       --last 10            zapisz tylko 10 ostatnich cykli
+       --clear              po poprawnym zapisie skasuj log w odbiorniku
+       --baud 115200        (domyslnie 115200)
+
+   Przyklady:
+       python tools/txlog_pobierz.py --last 5
+       python tools/txlog_pobierz.py --port COM5 --out C:\sciezka\log_szambo.txt
+       python tools/txlog_pobierz.py --clear
+
+   Pelny zrzut moze potrwac (115200 baud ~ 11 KB/s): 100 KB = ok. 10 s,
+   maksymalnie ok. 800 KB = ok. 70 s. W trakcie pokazuje licznik odebranych bajtow.
+
+   Komunikaty skryptu:
+       "Nie mozna otworzyc COMx"        -> zamknij Monitor / inny program z portem
+       "Brak odpowiedzi odbiornika"      -> zly port lub w RX nie ma firmware 2.0.0
+       "odebrano X B, zadeklarowano Y B" -> zaklocenia transmisji; plik zapisany,
+                                            ale powtorz pobranie dla pewnosci
+
+
+--------------------------------------------------------------------------------
+ SPOSOB 2: RECZNIE W MONITORZE (TERMINAL)
+--------------------------------------------------------------------------------
+Otworz PlatformIO Monitor (115200) na RX i wpisz polecenie + Enter:
+
+   TXLOG            informacje: liczba rekordow, rozmiar, ostatni epoch/id, wolne miejsce
+   TXLOG DUMP       wypisuje caly log w terminalu, miedzy znacznikami:
+                        ===TXLOG-BEGIN===
+                        ... rekordy ...
+                        ===TXLOG-END bytes=NNNN===
+                    (na czas zrzutu zwykle komunikaty diagnostyczne RX sa wyciszone)
+   TXLOG CLEAR      kasuje zapisany log w odbiorniku (nie ma cofania!)
+
+Wielkosc liter nie ma znaczenia. Inne polecenia sa ignorowane.
+
+Uwaga: TXLOG DUMP wypisuje CALY log - przy duzym logu zaleje terminal. Do plikow
+uzywaj sposobu 1 albo 3.
+
+
+--------------------------------------------------------------------------------
+ SPOSOB 3: MONITOR ZAPISUJACY WSZYSTKO DO PLIKU
+--------------------------------------------------------------------------------
+Monitor PlatformIO moze zapisywac caly wynik do pliku (z komunikatami RX i logiem):
+
+   pio device monitor --logfile rx_monitor.txt
+
+Potem w tym monitorze wpisz:  TXLOG DUMP
+Po zakonczeniu (===TXLOG-END...) zamknij monitor (Ctrl+C). W pliku rx_monitor.txt
+interesuje Cie fragment miedzy znacznikami BEGIN/END.
+(Wygodniej: sposob 1 - skrypt wycina ten fragment za Ciebie.)
+
+
+--------------------------------------------------------------------------------
+ CO JEST W REKORDZIE (JEDEN CYKL TX)
+--------------------------------------------------------------------------------
+   ##### RX epoch=ABCD1234 id=57 bytes=2310           <- naglowek dodany przez RX
+   CYCLE=57 | WAKE=TIMER | valid=1 | result=67.41 | series=5/6 | send=OK
+   --- SESSION CYCLE=57 BEGIN | WAKE=TIMER | ref=67.41 ---
+   [CYKL] ... [SERIA 1/6] ... [POMIAR] 1: 67.55 cm ... [KLASTER] ... [WYNIK] ...
+   [MAIN] Wysylka OK: 67.41 cm
+   --- SESSION CYCLE=57 END ---
+
+   WAKE=  przyczyna startu: TIMER (normalny cykl), POWERON (wlaczenie zasilania),
+          BROWNOUT (spadek napiecia), PANIC / *_WDT (awaria programu), EXT (przycisk EN)
+   valid= 1 = wynik zaakceptowany i wyslany, 0 = brak wiarygodnego wyniku
+   send=  OK / FAIL (brak ACK z odbiornika) / SKIP (nie bylo czego wysylac)
+
+   Gdy epoch sie zmienia (np. po pelnym kasowaniu pamieci TX), numeracja id zaczyna
+   sie od nowa - to normalne; rekord jest wtedy rozpoznawany po parze epoch + id.
+
+
+--------------------------------------------------------------------------------
+ ROZWIAZYWANIE PROBLEMOW
+--------------------------------------------------------------------------------
+ - "TXLOG" pokazuje rekordow=0: TX nie przeslal jeszcze logu (poczekaj na jego
+   najblizszy cykl) albo odbiornik nie ma firmware 2.0.0, albo TX i RX sa na roznych
+   kanalach (kanal ESP-NOW = 1 w obu).
+ - Odbiornik zrestartowal sie przy otwarciu portu: uzyj skryptu (DTR/RTS wylaczone)
+   i upewnij sie, ze w platformio.ini jest  monitor_dtr = 0  oraz  monitor_rts = 0.
+ - Log pojawia sie czesciowo: TX ma limit 20 s wysylki na cykl - zaleglosci dochodza
+   przy kolejnych cyklach.
+ - TX nie ma lokalnego zrzutu logu na Serial - jedyna droga odczytu to odbiornik (RX).
+ - Reset zasilania TX (odlaczenie/wlaczenie) nie kasuje logu ani postepu wysylki:
+   wszystko jest we flash; niewyslane cykle dojda do RX przy nastepnym kontakcie.
+================================================================================

@@ -1,0 +1,27 @@
+FAULTS=1, SCEN=transient, przebiegow: 150
+
+| Metryka | SUFIT (idealny czujnik) | V4 (v1.7.1 poprawki) | V5 off (kontrola) | B1 blind, 6 serii, cap 3 | B2 blind, 2 serie, cap 3 | B3 blind, 6 serii, cap 6 | B4 any, 6 serii, cap 3 |
+|---|---|---|---|---|---|---|---|
+| Widok odbiornika DOBRY (blad <= 10 cm) [% czasu] | 98.8 | 95.1 | 95.1 | 95.1 | 95.1 | 95.1 | 95.4 |
+| Widok NIEAKTUALNY (brak swiezych danych > 26 h) [%] | 0.1 | 2.6 | 2.6 | 2.6 | 2.6 | 2.6 | 1.8 |
+| Widok BLEDNY (swieze, ale zle dane) [%] | 1.1 | 2.3 | 2.3 | 2.3 | 2.3 | 2.3 | 2.8 |
+| Sredni blad widoku [cm] | 3.0 | 5.6 | 5.6 | 5.5 | 5.5 | 5.5 | 5.5 |
+| Dostarczone bledne wartosci (> 8 cm) [szt./50 dni] | 0.00 | 0.24 | 0.24 | 0.23 | 0.23 | 0.23 | 1.29 |
+| w tym grube bledy (> 20 cm) [szt./50 dni] | 0.00 | 0.13 | 0.13 | 0.13 | 0.13 | 0.13 | 1.11 |
+| Dostarczone wartosci ogolem [szt./50 dni] | 97.0 | 87.8 | 87.8 | 88.7 | 87.9 | 88.7 | 90.6 |
+| Wykrycie wywozu: mediana / p95 [h] (nie wykryto %) | 5.5 / 11.8 (0%) | 20.9 / 30.8 (0%) | 20.9 / 30.8 (0%) | 20.7 / 30.8 (0%) | 20.7 / 30.8 (0%) | 20.7 / 30.8 (0%) | 20.6 / 30.8 (0%) |
+| Powrot po resecie TX: mediana / p95 [h] (nie wrocil %) | 5.9 / 11.6 (0%) | 0.1 / 12.1 (0%) | 0.1 / 12.1 (0%) | 0.1 / 12.1 (0%) | 0.1 / 12.1 (0%) | 0.1 / 12.1 (0%) | 0.1 / 12.1 (0%) |
+| Powrot po awarii odbiornika: mediana / p95 [h] (nie wrocil %) | 5.7 / 11.3 (0%) | 1.2 / 25.4 (0%) | 1.2 / 25.4 (0%) | 1.2 / 28.0 (0%) | 1.2 / 26.9 (0%) | 1.2 / 28.0 (0%) | 1.2 / 25.1 (0%) |
+| Cykle: OK / NO_VALID / JUMP_REJ / DEADZONE | 100 / 0 / 0 / 0 | 89 / 11 / 1 / 0 | 89 / 11 / 1 / 0 | 89 / 11 / 1 / 0 | 89 / 11 / 1 / 0 | 89 / 11 / 1 / 0 | 89 / 11 / 1 / 1 |
+| Czas aktywnosci [min/dobe] | 5.3 | 5.6 | 5.6 | 5.8 | 5.6 | 5.8 | 6.7 |
+| Falszywe "pelny" (<= 30 cm przy poziomie >= 40) [szt./50 dni] | 0.00 | 0.05 | 0.05 | 0.05 | 0.04 | 0.05 | 1.04 |
+| Przebiegi z >= 1 falszywym "pelny" [%] | 0 | 5 | 5 | 5 | 3 | 5 | 64 |
+
+| Wariant | sondy/przebieg | sondy OK/przebieg | wykrycie slepoty (NO_VALID w blind) | falszywe flagi (NO_VALID w echo/dz) | powrot po slepocie mediana / p95 [h] (nie wrocil) |
+|---|---|---|---|---|---|
+| V4 (v1.7.1 poprawki) | 0.00 | 0.00 | 0 (0/222) | 0 (0/930) | 6.0 / 11.9 (0%) |
+| V5 off (kontrola) | 0.00 | 0.00 | 100 (222/222) | 0 (0/930) | 6.0 / 11.9 (0%) |
+| B1 blind, 6 serii, cap 3 | 3.93 | 0.95 | 100 (668/670) | 0 (0/933) | 2.4 / 8.4 (0%) |
+| B2 blind, 2 serie, cap 3 | 3.83 | 0.02 | 98 (648/661) | 0 (0/931) | 5.9 / 11.9 (0%) |
+| B3 blind, 6 serii, cap 6 | 3.93 | 0.95 | 100 (668/670) | 0 (0/933) | 2.4 / 8.4 (0%) |
+| B4 any, 6 serii, cap 3 | 20.32 | 2.48 | 100 (670/671) | 0 (0/2526) | 2.3 / 8.3 (0%) |

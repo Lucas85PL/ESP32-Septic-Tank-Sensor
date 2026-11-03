@@ -1,0 +1,9 @@
+# PlatformIO / edytory / dane lokalne
+.pio/
+.vscode/
+__pycache__/
+*.pyc
+*.log
+# zrzuty logow z urzadzenia (lokalne dane)
+RX/logi_tx/
+logi_tx/

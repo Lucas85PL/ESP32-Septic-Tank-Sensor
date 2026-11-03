@@ -1,0 +1,147 @@
+<!DOCTYPE html>
+<html lang="pl">
+<head>
+<meta charset="UTF-8">
+<title>ST7735 160x128 – Ekran bledu</title>
+<style>
+  body {
+    background: #1a1a1a;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    min-height: 100vh;
+    margin: 0;
+    font-family: sans-serif;
+    color: #888;
+    gap: 24px;
+  }
+
+  h2 { margin: 0; font-size: 14px; letter-spacing: 1px; }
+
+  /* Zewnetrzna ramka symulatora */
+  .screen-wrapper {
+    border: 2px solid #444;
+    border-radius: 4px;
+    padding: 10px;
+    background: #222;
+  }
+
+  /* Dokladnie 160x128 px – skalujemy 4x przez transform */
+  .display {
+    width: 160px;
+    height: 128px;
+    background: #000000;
+    position: relative;
+    image-rendering: pixelated;
+    transform: scale(4);
+    transform-origin: top left;
+  }
+
+  /* Kontener na skalowanie – musi miec rozmiar po skalowaniu */
+  .display-scale {
+    width: 640px;   /* 160 * 4 */
+    height: 512px;  /* 128 * 4 */
+    position: relative;
+  }
+
+  /* Tekst na wyswietlaczu */
+  .px {
+    position: absolute;
+    white-space: nowrap;
+    line-height: 1;
+    /* Adafruit GFX default font: 5x7 bitmapa + 1px odstep = 6x8 per char @ size1 */
+    font-family: 'Courier New', monospace;
+  }
+
+  /* size 1: 6px/char szerokosc, 8px wysokosc */
+  .s1 { font-size: 7px; letter-spacing: 1.1px; }
+
+  /* size 2: 12px/char szerokosc, 16px wysokosc */
+  .s2 { font-size: 14px; letter-spacing: 2.2px; font-weight: bold; }
+
+  .red   { color: #ff2200; }
+  .white { color: #ffffff; }
+
+  /* Linia referencyjna Y (wlaczana przez checkbox) */
+  .yline {
+    position: absolute;
+    left: 0; right: 0;
+    height: 1px;
+    background: rgba(0,255,0,0.25);
+    display: none;
+  }
+
+  /* Legenda */
+  .legend {
+    font-size: 12px;
+    line-height: 1.8;
+    max-width: 640px;
+    background: #222;
+    border: 1px solid #444;
+    border-radius: 4px;
+    padding: 10px 16px;
+  }
+  .legend span.r { color: #ff4400; }
+  .legend span.w { color: #ffffff; }
+  .legend code { background: #333; padding: 1px 4px; border-radius: 2px; font-size: 11px; }
+</style>
+</head>
+<body>
+
+<h2>ST7735S – 160 × 128 px (landscape) @ 4× zoom</h2>
+
+<div class="screen-wrapper">
+  <div class="display-scale">
+    <div class="display" id="disp">
+
+      <!-- Y=10: "BRAK / BLAD"  size 2, RED, x=14  (11 znakow * 12px = 132px) -->
+      <div class="px s2 red"   style="left:14px; top:10px;">BRAK / BLAD</div>
+
+      <!-- Y=30: "POMIARU"  size 2, RED, x=38  (7 znakow * 12px = 84px) -->
+      <div class="px s2 red"   style="left:38px; top:30px;">POMIARU</div>
+
+      <!-- Y=65: "OSTATNI POMIAR"  size 1, WHITE, wycentrowany -->
+      <!-- 14 znakow * 6px = 84px → x=(160-84)/2=38 -->
+      <div class="px s1 white" style="left:38px; top:65px;">OSTATNI POMIAR</div>
+
+      <!-- Y=76: "25h TEMU / 87cm (53%)"  size 1, WHITE, wycentrowany -->
+      <!-- 21 znakow * 6px = 126px → x=(160-126)/2=17 -->
+      <div class="px s1 white" style="left:17px; top:76px;">25h TEMU / 87cm (53%)</div>
+
+      <!-- Linie referencyjne Y (opcjonalne) -->
+      <div class="yline" style="top:10px"></div>
+      <div class="yline" style="top:30px"></div>
+      <div class="yline" style="top:65px"></div>
+      <div class="yline" style="top:76px"></div>
+
+    </div>
+  </div>
+</div>
+
+<div style="display:flex; gap:16px; align-items:center; font-size:13px;">
+  <label>
+    <input type="checkbox" id="gridToggle"> Pokaż linie Y
+  </label>
+</div>
+
+<div class="legend">
+  <b>Mapa pikseli (skala 1:1 wzgledm kodu):</b><br>
+  <span class="r">●</span> <code>Y=10, x=14</code> — "BRAK / BLAD"  · size 2 · 11×12px = 132px szer.<br>
+  <span class="r">●</span> <code>Y=30, x=38</code> — "POMIARU"      · size 2 · 7×12px  =  84px szer.<br>
+  <span class="w">●</span> <code>Y=65, wycentr.</code> — "OSTATNI POMIAR"              · size 1 · 84px<br>
+  <span class="w">●</span> <code>Y=76, wycentr.</code> — "25h TEMU / 87cm (53%)"      · size 1 · max ~132px<br>
+  <br>
+  Kolory: BGR display → <code>MY_RED = 0x001F</code> (wyswietla sie jako czerwony), <code>MY_WHITE = 0xFFFF</code>
+</div>
+
+<script>
+  document.getElementById('gridToggle').addEventListener('change', function() {
+    document.querySelectorAll('.yline').forEach(el => {
+      el.style.display = this.checked ? 'block' : 'none';
+    });
+  });
+</script>
+
+</body>
+</html>

@@ -1,0 +1,48 @@
+Seed 25. Awarie odbiornika (dni): 41.7-42.7, 27.0-29.0
+Wywozy (dzien): 9.4, 26.2, 44.0, 61.9, 78.6, 95.4, 112.7
+
+ dzien | prawda | odbiornik | STARA dostarczyla | NOWA dostarczyla
+-------+--------+-----------+-------------------+-----------------
+  25.4 |     39 | OK        | 39 cm             | 38 cm
+  25.9 |     37 | OK        | 37 cm             | 35 cm
+  26.4 |    157 | OK        | 157 cm            | 156 cm
+  26.9 |    153 | OK        | 153 cm            | 152 cm - brak ACK (retry)
+  27.4 |    150 | BRAK      | 150 cm - brak ACK | 148 cm - brak ACK (retry)
+  27.9 |    146 | BRAK      | 146 cm - brak ACK | 145 cm - brak ACK (retry)
+  28.4 |    143 | BRAK      | 143 cm - brak ACK | 142 cm - brak ACK (retry)
+  28.9 |    140 | BRAK      | 140 cm - brak ACK | 139 cm
+  29.4 |    137 | OK        | cisza (brak wyniku) | 136 cm
+  29.9 |    134 | OK        | cisza (brak wyniku) | 133 cm
+  30.4 |    130 | OK        | cisza (brak wyniku) | 129 cm
+  30.9 |    127 | OK        | cisza (brak wyniku) | 126 cm
+  31.4 |    124 | OK        | cisza (brak wyniku) | 123 cm
+  31.9 |    121 | OK        | cisza (brak wyniku) | 120 cm
+  32.4 |    118 | OK        | cisza (brak wyniku) | 116 cm
+  32.9 |    114 | OK        | cisza (brak wyniku) | 112 cm
+  33.5 |    110 | OK        | cisza (brak wyniku) | 108 cm
+  34.0 |    106 | OK        | cisza (brak wyniku) | 105 cm
+  34.5 |    103 | OK        | cisza (brak wyniku) | 102 cm
+  35.0 |    100 | OK        | cisza (brak wyniku) | 99 cm
+  35.5 |     96 | OK        | cisza (brak wyniku) | 94 cm
+  36.0 |     91 | OK        | cisza (brak wyniku) | 90 cm
+  36.5 |     88 | OK        | cisza (brak wyniku) | 87 cm
+  37.0 |     86 | OK        | cisza (brak wyniku) | 85 cm
+  37.5 |     83 | OK        | cisza (brak wyniku) | 82 cm
+  38.0 |     80 | OK        | cisza (brak wyniku) | 78 cm
+  38.5 |     75 | OK        | cisza (brak wyniku) | 73 cm
+  39.0 |     71 | OK        | cisza (brak wyniku) | 70 cm
+  39.5 |     68 | OK        | cisza (brak wyniku) | 67 cm
+  40.0 |     64 | OK        | cisza (brak wyniku) | 63 cm
+  40.5 |     61 | OK        | cisza (brak wyniku) | 60 cm
+  41.0 |     57 | OK        | cisza (brak wyniku) | 56 cm
+  41.5 |     53 | OK        | cisza (brak wyniku) | 52 cm
+  42.0 |     50 | BRAK      | cisza (brak wyniku) | 48 cm - brak ACK (retry)
+  42.5 |     46 | BRAK      | cisza (brak wyniku) | 45 cm
+  43.0 |     42 | OK        | cisza (brak wyniku) | 41 cm
+  43.5 |     39 | OK        | cisza (brak wyniku) | 37 cm
+  44.0 |     35 | OK        | cisza (brak wyniku) | 158 cm
+  44.5 |    155 | OK        | 155 cm            | 154 cm
+  45.0 |    152 | OK        | 152 cm            | 150 cm
+  45.5 |    148 | OK        | 148 cm            | 147 cm
+  46.0 |    144 | OK        | 144 cm            | 143 cm
+  46.5 |    141 | OK        | 141 cm            | 141 cm

@@ -1,0 +1,11 @@
+{
+  "autodeskProduct": "Fusion",
+  "type": "script",
+  "author": "",
+  "description": {
+    "": "Obudowa odbiornika RX v2.0 (E32R28T 2.8 cala): USB z lewej, plecki na tych samych wkretach, stopka"
+  },
+  "supportedOS": "windows|mac",
+  "editEnabled": true,
+  "version": "2.0"
+}
